@@ -1,0 +1,22 @@
+{% extends "account/base.html" %}
+{% block title %} customer  {% endblock %}
+
+{% block content %}
+
+
+{% if '/account/create_customer/' in request.path %}
+<form action="{%  url 'create_customer' %}" method="post">
+  {% else %}
+
+<form action="{%  url 'update_customer' id %}" method="post">
+  {% endif %}
+
+<div class=" form-group">
+   {{form}}
+</div>
+ 
+    {% csrf_token %}
+  <input type="submit" value="Save" class="btn btn-info">
+</form>
+
+{% endblock %}

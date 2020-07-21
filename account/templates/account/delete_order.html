@@ -1,0 +1,26 @@
+{% extends "account/base.html" %}
+
+{% block title %} profile  {% endblock %}
+
+
+
+
+{% block content %}
+
+
+<div class="alert alert-danger mt-5  shadow-lg" role="alert">
+  Are you sure want to delete this selected record {{item.product.name}}
+
+    <form action="{% url 'delete_order' item.id %}" method="post">
+        {% csrf_token %}
+        <div class="mt-5">
+
+        <input type="submit" value="Delete" class="btn  btn-danger">
+        <a href="{% url 'home' %}" class="btn btn-danger">Cancel</a>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}
+

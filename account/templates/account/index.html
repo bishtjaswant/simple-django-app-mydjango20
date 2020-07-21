@@ -1,0 +1,100 @@
+{% extends "account/base.html" %}
+
+{% block title %} account dashboard  {% endblock %}
+
+
+
+
+{% block content %}
+
+
+
+
+<!-- User Status -->
+{% include "account/status.html" %}
+
+
+<div class="row">
+    <div class="col-md-5  col-lg-5 col-sm-10">
+        <div class=" text-capitialize display-5">Customer</div>
+        <hr/>
+        <div class="card card-body shadow-lg " style="max-height:300px;overflow-y:scroll;">
+            <a href="{%  url 'create_customer' %}" class="btn btn-primary text-capitalize">create customer</a>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                        {% if customers %}
+                        {% for customer in customers %}
+                        <tr>
+                            <td> {{customer.name}} </td>
+                            <td> {{customer.phone}} </td>
+                            <td><a href="{% url 'customer' customer.id %}" class="btn btn-info">view info</a> </td>
+                           </tr>
+                        {% endfor %}
+                        {% else %}
+                            <tr> 
+                                <td colspan="4"  class="text-danger">   there are no  customers    </td>
+                            </td>
+
+                        {% endif %}
+                        </tbody>
+                    </table>
+
+        </div>
+    </div>
+    <div class="col-md-7 col-lg-7 col-sm-10">
+        <div class=" text-capitialize display-5">Last 5 orders</div>
+        <hr/>
+        <div class="card card-body shadow-lg p-2">
+           <div class="row mt-2">
+                <div class="col-md-11 mx-auto">
+                    <table class="  table table-responsive table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>product</th>
+                                    <th>customer</th>
+                                    <th>order date</th>
+                                    <th>status</th>
+                                    <th>updates</th>
+                                    <th>remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% if orders %}
+                               {% for order in orders %}
+
+                                <tr>
+                                    <td>     {{ order.product.name }}</td>
+                                    <td>     {{ order.customer.name }}</td>
+                                    <td>{{ order.date  }}</td>
+                                    <td>{{ order.status  }}</td>
+                                    <td><a href="{% url 'update_order' order.id %}" class="btn btn-info">UPDATE</a></td>
+                                    <td><a href="{% url 'delete_order' order.id %}" class="btn btn-danger">REMOVE</a></td>
+                                </tr>
+
+                            {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="6" class="text-danger">there are no orders to show !!</td>
+                                </tr>
+
+                            {% endif %}
+                            </tbody>
+                    </table>
+                </div> 
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}
+
